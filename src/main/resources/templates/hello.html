@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Strona o mnie</h1>
-
-<a th:href="@{/}">powrót do strony głównej</a>
-
+<h1>Wartości przekazane metodą GET</h1>
+<!--wyrażenie odwiłujące się do obiektu-->
+<p th:text="${name}"> name </p>
+<p th:text="${age}"> age </p>
 </body>
 </html>
