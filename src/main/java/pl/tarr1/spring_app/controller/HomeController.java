@@ -13,5 +13,8 @@ public class HomeController {
     public String home(){
         return "home";       // w return zwracamy nazwę szablonu html (Thymeleaf) - bez .html
     }
-
+    @GetMapping("/about")
+    public String about(){
+        return "about";
+    }
 }
