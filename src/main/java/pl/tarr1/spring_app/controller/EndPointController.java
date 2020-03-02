@@ -1,12 +1,15 @@
 package pl.tarr1.spring_app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.tarr1.spring_app.model.User;
 import pl.tarr1.spring_app.model.enums.Role;
 import pl.tarr1.spring_app.service.UserService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 // publikuje REST API -> Representative State Transfer
 @RestController     // mapowanie żądań prokołu html -> GET, POST, PUT, DELETE
@@ -23,5 +26,9 @@ public class EndPointController {
     ){
         // logika biznesowa zapisana w klasie UserService
         userService.registerUser(name, lastName, email, password);
+    }
+    @GetMapping("/users")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
     }
 }
