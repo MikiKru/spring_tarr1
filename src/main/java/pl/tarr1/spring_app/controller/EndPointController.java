@@ -22,6 +22,6 @@ public class EndPointController {
             String name, String lastName, String email, String password
     ){
         // logika biznesowa zapisana w klasie UserService
-
+        userService.registerUser(name, lastName, email, password);
     }
 }
