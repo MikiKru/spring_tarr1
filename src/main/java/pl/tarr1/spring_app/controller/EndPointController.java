@@ -1,9 +1,7 @@
 package pl.tarr1.spring_app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.tarr1.spring_app.model.User;
 import pl.tarr1.spring_app.model.enums.Role;
 import pl.tarr1.spring_app.service.UserService;
@@ -32,10 +30,22 @@ public class EndPointController {
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
-    @GetMapping("/user")
-    public User getUserById(Long userId){
-        Optional<User> userOpt = userService.getUserById(userId);
-        return userOpt.orElse(null);
+    @GetMapping("/users/{userId}")   // w {} występuje część zmienna ścieżki
+    public User getUserById(@PathVariable("userId") Long userId){
+        // sprawdzam czy optional nie zawiera null
+        return userService.getUserById(userId).orElse(null);
+    }
+    @GetMapping("/userByEmail")   // w {} występuje część zmienna ścieżki
+    public User getUserByEmail(@RequestParam("email") String email){    // @RequestParam -> przekazuje dane w parametrach protokołu html
+        return userService.getUserByEmail(email).orElse(null);
+    }
+    @PutMapping("/changePassword")
+    public String setNewPassword(
+            @RequestParam("userId") Long userId,
+            @RequestParam("newPassword") String newPassword,
+            @RequestParam("confirmPassword") String confirmPassword
+    ){
+        return userService.setNewPassword(userId, newPassword, confirmPassword);
     }
 
 }

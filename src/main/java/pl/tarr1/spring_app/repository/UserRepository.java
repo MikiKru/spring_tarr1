@@ -9,4 +9,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 // public interface UserRepository extends JpaRepository<TYP OBIEKTU ORM, TYP KLUCZA GŁÓWNEGO> {
 // ten interfejs pozwala wykonywać polecenia dla tabelki user poprzez wywoływanie metod w Javie
 
+    // SELECT * FROM user WHERE email = ?
+    User findFirstByEmail(String email);
 }

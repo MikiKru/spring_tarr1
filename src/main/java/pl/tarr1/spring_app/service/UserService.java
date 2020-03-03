@@ -30,5 +30,22 @@ public class UserService {
     public Optional<User> getUserById(Long userId){
         return userRepository.findById(userId);
     }
-
+    // SELECT * FROM user WHERE email = ?
+    public Optional<User> getUserByEmail(String email){
+        Optional<User> userOpt = Optional.of(userRepository.findFirstByEmail(email));
+        return userOpt;
+    }
+    public String setNewPassword(Long userId, String newPassword, String confirmPassword){
+        if(newPassword.equals(confirmPassword)) {
+            // SELECT * FROM user WHERE user_id = ?
+            if (getUserById(userId).isPresent()) {
+                User userToUpdate = getUserById(userId).get();
+                // UPDATE user SET password = ? WHERE user_id = ?
+                userToUpdate.setPassword(newPassword);
+                userRepository.save(userToUpdate);
+            }
+            return "Nie ma takiego użytkownika";
+        }
+        return "Podane hasła muszą być takie same";
+    }
 }
