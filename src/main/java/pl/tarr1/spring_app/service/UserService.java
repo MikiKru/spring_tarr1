@@ -36,7 +36,9 @@ public class UserService {
     }
     // SELECT * FROM user WHERE email = ?
     public Optional<User> getUserByEmail(String email){
-        Optional<User> userOpt = Optional.of(userRepository.findFirstByEmail(email));
+        // Optional.ofNullable(Object o) -> przyjmuje wartość lub null do Optionala
+        // Optional.of(Object o) -> tworzy optionala tylko dla wartości nie null
+        Optional<User> userOpt = Optional.ofNullable(userRepository.findFirstByEmail(email));
         return userOpt;
     }
     public String setNewPassword(Long userId, String newPassword, String confirmPassword){
