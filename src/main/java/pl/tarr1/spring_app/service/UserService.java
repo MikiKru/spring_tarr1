@@ -8,6 +8,7 @@ import pl.tarr1.spring_app.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service             // klasa implementująca logikę biznesową
 public class UserService {
@@ -25,4 +26,9 @@ public class UserService {
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
+    // SELECT * FROM user WHERE user_id = ?
+    public Optional<User> getUserById(Long userId){
+        return userRepository.findById(userId);
+    }
+
 }

@@ -10,6 +10,7 @@ import pl.tarr1.spring_app.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 // publikuje REST API -> Representative State Transfer
 @RestController     // mapowanie żądań prokołu html -> GET, POST, PUT, DELETE
@@ -31,4 +32,10 @@ public class EndPointController {
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
+    @GetMapping("/user")
+    public User getUserById(Long userId){
+        Optional<User> userOpt = userService.getUserById(userId);
+        return userOpt.orElse(null);
+    }
+
 }
