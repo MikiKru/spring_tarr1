@@ -20,11 +20,11 @@ public class EndPointController {
     }
     // metoda do rejestracji użytkowników
     @PostMapping("/registration")
-    public void registerUser(
+    public boolean registerUser(
             String name, String lastName, String email, String password
     ){
         // logika biznesowa zapisana w klasie UserService
-        userService.registerUser(name, lastName, email, password);
+        return userService.registerUser(name, lastName, email, password);
     }
     @GetMapping("/users")
     public List<User> getAllUsers(){
