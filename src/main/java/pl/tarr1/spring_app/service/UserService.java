@@ -18,9 +18,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
     // INSERT INTO user VALUES (?,?,?,?)
-    public void registerUser(String name, String lastName, String email, String password){
-        userRepository.save(new User(name, lastName, email,password,
-                LocalDateTime.now(), true, Role.ROLE_USER));
+    public boolean registerUser(String name, String lastName, String email, String password){
+        if(!getUserByEmail(email).isPresent()) {
+            userRepository.save(new User(name, lastName, email, password,
+                    LocalDateTime.now(), true, Role.ROLE_USER));
+            return true;
+        }
+        return false;
     }
     // SELECT * FROM user
     public List<User> getAllUsers(){
@@ -43,9 +47,23 @@ public class UserService {
                 // UPDATE user SET password = ? WHERE user_id = ?
                 userToUpdate.setPassword(newPassword);
                 userRepository.save(userToUpdate);
+                return userToUpdate.toString();
             }
             return "Nie ma takiego użytkownika";
         }
         return "Podane hasła muszą być takie same";
     }
+    public boolean deleteUserById(Long userId){
+        if(userRepository.findById(userId).isPresent()) {
+            userRepository.deleteById(userId);
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
+
 }

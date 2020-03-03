@@ -47,5 +47,9 @@ public class EndPointController {
     ){
         return userService.setNewPassword(userId, newPassword, confirmPassword);
     }
+    @DeleteMapping("/deleteUser")
+    public boolean deleteUserById(@RequestParam("userId") Long userId){
+        return userService.deleteUserById(userId);
+    }
 
 }
