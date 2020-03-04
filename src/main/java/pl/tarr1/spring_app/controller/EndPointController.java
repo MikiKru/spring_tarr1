@@ -57,7 +57,7 @@ public class EndPointController {
     public boolean deleteUserById(@RequestParam("userId") Long userId){
         return userService.deleteUserById(userId);
     }
-    @GetMapping("/addPost")
+    @PostMapping("/addPost")
     public Post addPost(
             @RequestParam String title,
             @RequestParam String content,

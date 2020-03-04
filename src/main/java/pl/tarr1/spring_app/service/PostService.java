@@ -8,6 +8,7 @@ import pl.tarr1.spring_app.model.enums.Category;
 import pl.tarr1.spring_app.repository.PostRepository;
 import pl.tarr1.spring_app.repository.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -23,8 +24,9 @@ public class PostService {
     public Post addPostByUser(String title, String content, Category category, Long userId){
         Optional<User> userOpt = userRepository.findById(userId);   // SELECT * FROM user WHERE user_id = ?
         if(userOpt.isPresent()){
-            Post post = new Post(title, content, category, userOpt.get());
+            Post post = new Post(title, content, category, userOpt.get(), LocalDateTime.now());
             postRepository.save(post);                              // INSERT INTO post VALUES (?,?,?,?)
+            return post;
         }
         return null;
     }
