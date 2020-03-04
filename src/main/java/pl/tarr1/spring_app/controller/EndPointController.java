@@ -2,8 +2,11 @@ package pl.tarr1.spring_app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.tarr1.spring_app.model.Post;
 import pl.tarr1.spring_app.model.User;
+import pl.tarr1.spring_app.model.enums.Category;
 import pl.tarr1.spring_app.model.enums.Role;
+import pl.tarr1.spring_app.service.PostService;
 import pl.tarr1.spring_app.service.UserService;
 
 import java.time.LocalDateTime;
@@ -14,10 +17,13 @@ import java.util.Optional;
 @RestController     // mapowanie żądań prokołu html -> GET, POST, PUT, DELETE
 public class EndPointController {
     private UserService userService;
+    private PostService postService;
     @Autowired
-    public EndPointController(UserService userService) {
+    public EndPointController(UserService userService, PostService postService) {
         this.userService = userService;
+        this.postService = postService;
     }
+
     // metoda do rejestracji użytkowników
     @PostMapping("/registration")
     public boolean registerUser(
@@ -51,5 +57,13 @@ public class EndPointController {
     public boolean deleteUserById(@RequestParam("userId") Long userId){
         return userService.deleteUserById(userId);
     }
-
+    @GetMapping("/addPost")
+    public Post addPost(
+            @RequestParam String title,
+            @RequestParam String content,
+            @RequestParam Category category,
+            @RequestParam Long userId
+    ){
+       return postService.addPostByUser(title, content, category, userId);
+    }
 }

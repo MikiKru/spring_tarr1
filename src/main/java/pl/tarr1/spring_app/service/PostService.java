@@ -21,9 +21,10 @@ public class PostService {
     }
     // 1. dodawanie posta przez użytkownika
     public Post addPostByUser(String title, String content, Category category, Long userId){
-        Optional<User> userOpt = userRepository.findById(userId);
+        Optional<User> userOpt = userRepository.findById(userId);   // SELECT * FROM user WHERE user_id = ?
         if(userOpt.isPresent()){
             Post post = new Post(title, content, category, userOpt.get());
+            postRepository.save(post);                              // INSERT INTO post VALUES (?,?,?,?)
         }
         return null;
     }
