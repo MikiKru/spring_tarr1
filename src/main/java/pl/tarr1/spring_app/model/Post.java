@@ -28,4 +28,11 @@ public class Post {
     @ManyToOne
     private User user;
     // ==============================================
+    public Post(String title, String content, Category category, User user) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.user = user;
+    }
+
 }

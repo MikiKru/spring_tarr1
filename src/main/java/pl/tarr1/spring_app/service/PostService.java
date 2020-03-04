@@ -3,6 +3,7 @@ package pl.tarr1.spring_app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.tarr1.spring_app.model.Post;
+import pl.tarr1.spring_app.model.User;
 import pl.tarr1.spring_app.model.enums.Category;
 import pl.tarr1.spring_app.repository.PostRepository;
 import pl.tarr1.spring_app.repository.UserRepository;
@@ -19,7 +20,11 @@ public class PostService {
         this.userRepository = userRepository;
     }
     // 1. dodawanie posta przez użytkownika
-    public Post addPostByUser(String title, String content, Category category){
+    public Post addPostByUser(String title, String content, Category category, Long userId){
+        Optional<User> userOpt = userRepository.findById(userId);
+        if(userOpt.isPresent()){
+            Post post = new Post(title, content, category, userOpt.get());
+        }
         return null;
     }
     // 2. wyszukiwanie posta po kluczu głównym
