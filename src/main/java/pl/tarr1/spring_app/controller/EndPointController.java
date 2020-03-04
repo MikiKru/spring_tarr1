@@ -81,8 +81,19 @@ public class EndPointController {
                            @RequestParam Category category){
         return postService.updatePost(postId, title, content, category);
     }
-
-
-
+    @GetMapping("/posts")
+    public List<Post> getAllPostsOrderBySubmissionDateDesc(){
+        return postService.getAllPostsOrderBySubmissionDateDesc();
+    }
+    @GetMapping("/postsByCategory/{category}")
+    public List<Post> getPostsByCategoryOrderBySubmissionDateDesc(
+            @PathVariable("category") Category category
+    ){
+        return postService.getPostsByCategoryOrderBySubmissionDateDesc(category);
+    }
+    @GetMapping("/groupPostsIntoCategory")
+    public void groupPostsIntoCategory(){
+        postService.groupPostsIntoCategory();
+    }
 
 }
