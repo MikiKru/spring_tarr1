@@ -1,5 +1,6 @@
 package pl.tarr1.spring_app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,8 @@ import pl.tarr1.spring_app.model.enums.Role;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,6 +28,11 @@ public class User {
     private Boolean status;
     @Enumerated
     private Role role;
+    // użytkownik może opublikować wiele postów zapisanych w liście
+    @JsonIgnore     // zignoruj to pole w publikowanym API
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts = new ArrayList<>();
+    // =================================================
 
     public User(String name, String lastName, String email, String password, LocalDateTime registrationDate, Boolean status, Role role) {
         this.name = name;
