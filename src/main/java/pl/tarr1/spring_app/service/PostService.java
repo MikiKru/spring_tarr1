@@ -30,16 +30,31 @@ public class PostService {
         }
         return null;
     }
-    // 2. wyszukiwanie posta po kluczu głównym
-    public Optional<Post> findPostById(Long postId){
+    // RZAD I. wyszukiwanie posta po kluczu głównym
+    public Post findPostById(Long postId){
+        if(postRepository.findById(postId).isPresent()){
+            return postRepository.findById(postId).get();   // SELECT * FROM post WHERE post_id = ?
+        }
         return null;
     }
-    // 3. usuwanie posta
+    // RZAD II. usuwanie posta
     public boolean deletePostById(Long postId){
+        if(postRepository.findById(postId).isPresent()) {
+            postRepository.deleteById(postId);      // DELETE FROM post WHERE post_id = ?
+            return true;
+        }
         return false;
     }
-    // 4. zmiana danych posta
+    // RZAD III. zmiana danych posta
     public Post updatePost(Long postId, String title, String content, Category category){
+        if(postRepository.findById(postId).isPresent()){
+            Post post = postRepository.findById(postId).get();
+            post.setTitle(title);
+            post.setContent(content);
+            post.setCategory(category);
+            postRepository.save(post);             // UPDATE post SET title = ?, content = ?, category = ? WHERE post_id = ?
+            return post;
+        }
         return null;
     }
 }
