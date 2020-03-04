@@ -66,4 +66,23 @@ public class EndPointController {
     ){
        return postService.addPostByUser(title, content, category, userId);
     }
+    @GetMapping("/posts/{postId}")
+    public Post getPostById(@PathVariable("postId") Long postId){
+        return postService.findPostById(postId);
+    }
+    @DeleteMapping("/deletePost")
+    public boolean deletePostById(@RequestParam("postId") Long postId){
+        return postService.deletePostById(postId);
+    }
+    @PutMapping("/updatePost")
+    public Post updatePost(@RequestParam Long postId,
+                           @RequestParam String title,
+                           @RequestParam String content,
+                           @RequestParam Category category){
+        return postService.updatePost(postId, title, content, category);
+    }
+
+
+
+
 }
