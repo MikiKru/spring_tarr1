@@ -97,4 +97,8 @@ public class EndPointController {
         return postService.groupPostsIntoCategory();
     }
 
+    @PutMapping("/updatePostTitle")
+    public boolean updatePostTitle(@RequestParam("postId") Long postId, @RequestParam("title") String title){
+        return postService.updatePostTitle(postId, title);
+    }
 }

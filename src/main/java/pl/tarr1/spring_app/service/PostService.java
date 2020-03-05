@@ -82,5 +82,12 @@ public class PostService {
         }
         return groupedMap;
     }
+    public boolean updatePostTitle(Long postId, String title) {
+        if (postRepository.findById(postId).isPresent()) {
+            postRepository.updatePostTitle(title, postId);
+            return true;
+        }
+        return false;
+    }
 }
 
