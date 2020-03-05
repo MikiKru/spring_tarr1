@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.tarr1.spring_app.model.User;
 import pl.tarr1.spring_app.model.Role;
+import pl.tarr1.spring_app.repository.RoleRepository;
 import pl.tarr1.spring_app.repository.UserRepository;
 
 import java.time.LocalDateTime;
@@ -13,10 +14,13 @@ import java.util.Optional;
 @Service             // klasa implementująca logikę biznesową
 public class UserService {
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
     @Autowired      // wstrzyknięcie zależności UserRepository z SpringContext do klasy UserService
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
+
     // INSERT INTO user VALUES (?,?,?,?)
     public boolean registerUser(String name, String lastName, String email, String password){
         if(!getUserByEmail(email).isPresent()) {
