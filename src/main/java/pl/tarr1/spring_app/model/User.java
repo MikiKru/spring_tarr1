@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.tarr1.spring_app.model.enums.Role;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -26,8 +27,20 @@ public class User {
     private String password;
     private LocalDateTime registrationDate;
     private Boolean status;
-    @Enumerated
-    private Role role;
+//    @Enumerated
+//    private Role role;
+    // ----------------------------------------------------------
+    // każdy użytkownik może mieć wiele różnych ról
+    // każda rola może być współdzielona przez wielu użytkowników
+    @ManyToMany
+    @JoinTable(     // tworzy tabelkę dla relacji n : m
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    Set<Role> roles = new HashSet<>();
+    // ----------------------------------------------------------
+
     // użytkownik może opublikować wiele postów zapisanych w liście
     @JsonIgnore     // zignoruj to pole w publikowanym API
     @OneToMany(mappedBy = "user")
@@ -41,6 +54,6 @@ public class User {
         this.password = password;
         this.registrationDate = registrationDate;
         this.status = status;
-        this.role = role;
+        this.roles.add(role);
     }
 }

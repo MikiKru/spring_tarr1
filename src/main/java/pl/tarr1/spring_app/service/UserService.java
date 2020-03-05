@@ -3,7 +3,7 @@ package pl.tarr1.spring_app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.tarr1.spring_app.model.User;
-import pl.tarr1.spring_app.model.enums.Role;
+import pl.tarr1.spring_app.model.Role;
 import pl.tarr1.spring_app.repository.UserRepository;
 
 import java.time.LocalDateTime;

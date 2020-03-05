@@ -5,14 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import pl.tarr1.spring_app.model.Post;
 import pl.tarr1.spring_app.model.User;
 import pl.tarr1.spring_app.model.enums.Category;
-import pl.tarr1.spring_app.model.enums.Role;
 import pl.tarr1.spring_app.service.PostService;
 import pl.tarr1.spring_app.service.UserService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 // publikuje REST API -> Representative State Transfer
 @RestController     // mapowanie żądań prokołu html -> GET, POST, PUT, DELETE
