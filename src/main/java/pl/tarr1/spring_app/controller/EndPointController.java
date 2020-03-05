@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 // publikuje REST API -> Representative State Transfer
+@RequestMapping("/api")     // prefix do zasobów kontrollera EndPointConttroller
 @RestController     // mapowanie żądań prokołu html -> GET, POST, PUT, DELETE
 public class EndPointController {
     private UserService userService;
