@@ -3,7 +3,6 @@ package pl.tarr1.spring_app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.tarr1.spring_app.model.User;
-import pl.tarr1.spring_app.model.Role;
 import pl.tarr1.spring_app.repository.RoleRepository;
 import pl.tarr1.spring_app.repository.UserRepository;
 
@@ -25,7 +24,7 @@ public class UserService {
     public boolean registerUser(String name, String lastName, String email, String password){
         if(!getUserByEmail(email).isPresent()) {
             userRepository.save(new User(name, lastName, email, password,
-                    LocalDateTime.now(), true, Role.ROLE_USER));
+                    LocalDateTime.now(), true, roleRepository.getOne(1L)));
             return true;
         }
         return false;
