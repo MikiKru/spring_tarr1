@@ -11,6 +11,7 @@ import pl.tarr1.spring_app.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 // publikuje REST API -> Representative State Transfer
@@ -92,8 +93,8 @@ public class EndPointController {
         return postService.getPostsByCategoryOrderBySubmissionDateDesc(category);
     }
     @GetMapping("/groupPostsIntoCategory")
-    public void groupPostsIntoCategory(){
-        postService.groupPostsIntoCategory();
+    public Map<String, String> groupPostsIntoCategory(){
+        return postService.groupPostsIntoCategory();
     }
 
 }

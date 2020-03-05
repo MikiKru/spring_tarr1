@@ -75,10 +75,10 @@ public class PostService {
     }
 
     // wynika zapytania w adnotacji @Query
-    public Map<String, Integer> groupPostsIntoCategory() {
-        Map<String, Integer> groupedMap = new HashMap<>();
+    public Map<String, String> groupPostsIntoCategory() {
+        Map<String, String> groupedMap = new HashMap<>();
         for (Object[] groupedObjects : postRepository.groupPostsIntoCategory()) {
-            groupedMap.put(Category.values()[(Integer) groupedObjects[0]].name(),(Integer)groupedObjects[1]);
+            groupedMap.put(Category.values()[(Integer) groupedObjects[0]].name(),String.valueOf(groupedObjects[1]));
         }
         return groupedMap;
     }
