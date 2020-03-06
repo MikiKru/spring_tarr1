@@ -30,4 +30,16 @@ public class BlogController {
         model.addAttribute("post", postService.findPostById(postId));
         return "post";
     }
+    @GetMapping("/addPost")
+    public String addPost(){
+        return "addPost";
+    }
+    @GetMapping("/register")
+    public String register(){
+        return "registration";
+    }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+
+<!--header-->
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+
+  <!-- Navigation -->
+  <!--th:replace -> importuje fragment pochodzący z innego pliku html-->
+  <nav th:replace="fragments/navbar :: navbar"></nav>
+
+  <!-- Page Header -->
+  <header
+  th:replace="fragments/pageHeader :: pageHeader(title='Add new post', subtitle='add to IT blog')">
+  </header>
+
+  <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        <h1>Add post form</h1>
+        </div>
+      </div>
+    </div>
+  <hr>
+
+  <!-- Footer -->
+  <footer th:replace="fragments/footer :: footer"></footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
