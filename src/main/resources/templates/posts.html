@@ -17,12 +17,13 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview">
-          <a th:href="@{/posts&{postId}}">    <!-- prze kliknięgiu wysyła żądanie GET -->
-            <h2 class="post-title"> title </h2>
-            <h3 class="post-subtitle"> category </h3>
+        <!--th:each="post : ${posts}" to samo co for(Post post : List<Post>){}-->
+        <div class="post-preview" th:each="post : ${posts}">
+          <a th:href="@{'/posts&'+${post.getPostId()}}">    <!-- prze kliknięgiu wysyła żądanie GET -->
+            <h2 th:text="${post.getTitle()}" class="post-title"> title </h2>
+            <h3 th:text="${'category: ' + post.getCategory().getCategoryName()}" class="post-subtitle"> category </h3>
           </a>
-          <p class="post-meta"> author </p>
+          <p th:text="${'author: ' + post.getUser().getName() + ' ' + post.getUser().getLastName()}"class="post-meta"> author </p>
         </div>
         <hr>
         <!-- Pager -->
