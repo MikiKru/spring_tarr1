@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th=”http://www.thymeleaf.org”>
+<html xmlns:th=”http://www.thymeleaf.org” xmlns="http://www.w3.org/1999/html">
 
 <!--header-->
 <head th:replace="fragments/header :: header"></head>
@@ -20,6 +20,19 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
         <h1>Add post form</h1>
+
+            <form th:action="@{/registration}" th:method="post">
+                <input type="text" placeholder="input your post title"></br>
+                <textarea placeholder="input your post content"></textarea></br>
+                <label> select category </label></br>
+                <select>
+                    <option> example1 </option>
+                    <option> example2 </option>
+                    <option> example3 </option>
+                </select></br>
+                <input type="submit" value="add post">
+            </form>
+
         </div>
       </div>
     </div>
