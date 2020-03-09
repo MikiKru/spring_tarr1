@@ -3,12 +3,17 @@ package pl.tarr1.spring_app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.tarr1.spring_app.model.Post;
 import pl.tarr1.spring_app.model.enums.Category;
 import pl.tarr1.spring_app.service.PostService;
 import pl.tarr1.spring_app.service.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 public class BlogController {
@@ -32,11 +37,25 @@ public class BlogController {
         model.addAttribute("post", postService.findPostById(postId));
         return "post";
     }
-    @GetMapping("/addPost")                                       // wywołanie formularza i przekazanie parametrów POST /addPost
+    @GetMapping("/addPost")                 // wywołanie formularza i przekazanie parametrów POST /addPost
     public String addPost(Model model){
         model.addAttribute("post", new Post());                 // przekazanie obiektu post do th:object formularza
         model.addAttribute("categories", Category.values());    // przekazanie tablicy kategorii do option formularza
         return "addPost";
+    }
+    @PostMapping("/addPost")               // adres na którym odbierane są parametry przekazane żądaniem GET /addPost
+    public String addPost(@ModelAttribute @Valid Post post, BindingResult bindingResult){
+        // @ModelAttribute Typ nazwaObiektu -> pobiera obiekt przekazany określonym żądaniem
+        if(bindingResult.hasErrors()){      // obiekt bindingResult przechowuje informacje o błędach
+                                            // wynikających z niespełnienia wymagań adnotacji w modelu Post
+            return "addPost";
+        }
+        postService.addPostByUser(
+                post.getTitle(),
+                post.getContent(),
+                post.getCategory(),
+                userService.getUserById(3L).get().getUserId());
+        return "redirect:/";        // wykonanie żądania get na adres "/"
     }
     @GetMapping("/register")
     public String register(){

@@ -1,13 +1,12 @@
 package pl.tarr1.spring_app.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import pl.tarr1.spring_app.model.enums.Category;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,7 +16,9 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
+    @NotBlank(message = "Title is mandatory field")
     private String title;
+    @NotBlank(message = "Content is mandatory field")
     @Type(type = "text")    // rozszerza typ varchar(255) dla string na text -> 4G
     private String content;
     @Enumerated

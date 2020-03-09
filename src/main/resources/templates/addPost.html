@@ -24,13 +24,17 @@
             <!--*{} - pole obiektu -->
             <!--@{} - adres url -->
             <form th:action="@{/addPost}" th:method="post" th:object="${post}">
-                <input th:field="*{title}" type="text" placeholder="input your post title"></br>
-                <textarea th:field="*{content}" placeholder="input your post content"></textarea></br>
+                <input th:field="*{title}" type="text" placeholder="input your post title"></br>        <!-- pole tekstowe jednowierszowe -->
+                <textarea th:field="*{content}" placeholder="input your post content"></textarea></br>  <!-- pole tekstowe duże -->
                 <label> select category </label></br>
-                <select>
-                    <option th:field="*{category}" th:each="c : ${categories}" th:value="${c}" th:text="${c.getCategoryName()}"></option>
+                <select th:field="*{category}">                                                    <!-- lista rozwijalna -->
+                    <option
+                            th:each="c : ${categories}"
+                            th:value="${c}"
+                            th:text="${c.getCategoryName()}">
+                    </option>
                 </select></br>
-                <input type="submit" value="add post">
+                <input type="submit" value="add post">                      <!-- button -->
             </form>
 
         </div>
