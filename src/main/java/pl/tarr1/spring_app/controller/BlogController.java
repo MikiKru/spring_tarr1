@@ -65,8 +65,12 @@ public class BlogController {
         return "registration";
     }
     @PostMapping("/register")
-    public String register(@ModelAttribute @Valid User user, BindingResult bindingResult){
+    public String register(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) {
+            return "registration";
+        }
+        if(!user.getPassword().equals(user.getPasswordConfirm())){
+            model.addAttribute("differentPassword", "Registration failed! Passwords were different.");
             return "registration";
         }
         userService.registerUser(
