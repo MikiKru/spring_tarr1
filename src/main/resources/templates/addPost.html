@@ -24,17 +24,21 @@
             <!--*{} - pole obiektu -->
             <!--@{} - adres url -->
             <form th:action="@{/addPost}" th:method="post" th:object="${post}">
-                <input th:field="*{title}" type="text" placeholder="input your post title"></br>        <!-- pole tekstowe jednowierszowe -->
-                <textarea th:field="*{content}" placeholder="input your post content"></textarea></br>  <!-- pole tekstowe duże -->
-                <label> select category </label></br>
-                <select th:field="*{category}">                                                    <!-- lista rozwijalna -->
-                    <option
-                            th:each="c : ${categories}"
-                            th:value="${c}"
-                            th:text="${c.getCategoryName()}">
-                    </option>
-                </select></br>
-                <input type="submit" value="add post">                      <!-- button -->
+                <div class="form-group">
+                    <p th:errors="*{title}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
+                    <input th:field="*{title}" type="text" placeholder="input your post title" class="form-control"></br>        <!-- pole tekstowe jednowierszowe -->
+                    <p th:errors="*{content}" style="font-size: 10px" class="alert alert-danger"> error </p>
+                    <textarea th:field="*{content}" placeholder="input your post content" class="form-control"></textarea></br>  <!-- pole tekstowe duże -->
+                    <label style="font-size: 16px"> <b>select category</b> </label></br>
+                    <select th:field="*{category}" class="form-control">                                                    <!-- lista rozwijalna -->
+                        <option
+                                th:each="c : ${categories}"
+                                th:value="${c}"
+                                th:text="${c.getCategoryName()}">
+                        </option>
+                    </select></br>
+                    <input type="submit" value="add post" class="btn btn-primary mt-2 float-center">                      <!-- button -->
+                </div>
             </form>
 
         </div>

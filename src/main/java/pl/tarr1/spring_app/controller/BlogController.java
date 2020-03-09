@@ -44,10 +44,11 @@ public class BlogController {
         return "addPost";
     }
     @PostMapping("/addPost")               // adres na którym odbierane są parametry przekazane żądaniem GET /addPost
-    public String addPost(@ModelAttribute @Valid Post post, BindingResult bindingResult){
+    public String addPost(@ModelAttribute @Valid Post post, BindingResult bindingResult, Model model){
         // @ModelAttribute Typ nazwaObiektu -> pobiera obiekt przekazany określonym żądaniem
         if(bindingResult.hasErrors()){      // obiekt bindingResult przechowuje informacje o błędach
                                             // wynikających z niespełnienia wymagań adnotacji w modelu Post
+            model.addAttribute("categories", Category.values());
             return "addPost";
         }
         postService.addPostByUser(
