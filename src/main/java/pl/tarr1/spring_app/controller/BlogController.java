@@ -42,4 +42,8 @@ public class BlogController {
     public String login(){
         return "login";
     }
+    @GetMapping("/contact")
+    public String contact(){
+        return "contact";
+    }
 }
