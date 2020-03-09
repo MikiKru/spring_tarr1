@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,6 +32,10 @@ public class User {
     @Size(min = 6, message = "password must have at least {min} characters")
     @NotBlank(message = "password is mandatory field")
     private String password;
+    @Transient                              // adnotacja hibernate wykluczająca pole z mapowania obiektowo-relacyjnego
+    private String passwordConfirm;
+
+
     private LocalDateTime registrationDate;
     private Boolean status;
 //    @Enumerated

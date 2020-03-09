@@ -32,7 +32,7 @@
               <p th:errors="*{password}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
               <input th:field="*{password}" type="password" placeholder="input your password" class="form-control"></br>
               <p th:errors="*{passwordConfirm}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
-              <input th:field="*{passwordConfirm}" type="password" placeholder="input your password" class="form-control"></br>
+              <input th:field="*{passwordConfirm}" type="password" placeholder="confirm your password" class="form-control"></br>
               <input type="submit" value="register" class="btn btn-primary mt-2 float-center">                      <!-- button -->
             </div>
           </form>
