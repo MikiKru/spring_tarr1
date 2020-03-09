@@ -20,15 +20,15 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
         <h1>Add post form</h1>
-
-            <form th:action="@{/registration}" th:method="post">
-                <input type="text" placeholder="input your post title"></br>
-                <textarea placeholder="input your post content"></textarea></br>
+            <!--${} - obiekt -->
+            <!--*{} - pole obiektu -->
+            <!--@{} - adres url -->
+            <form th:action="@{/addPost}" th:method="post" th:object="${post}">
+                <input th:field="*{title}" type="text" placeholder="input your post title"></br>
+                <textarea th:field="*{content}" placeholder="input your post content"></textarea></br>
                 <label> select category </label></br>
                 <select>
-                    <option> example1 </option>
-                    <option> example2 </option>
-                    <option> example3 </option>
+                    <option th:field="*{category}" th:each="c : ${categories}" th:value="${c}" th:text="${c.getCategoryName()}"></option>
                 </select></br>
                 <input type="submit" value="add post">
             </form>
