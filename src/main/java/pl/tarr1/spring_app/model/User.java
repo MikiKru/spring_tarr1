@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,10 +24,16 @@ public class User {
     @Id                                                 // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY - auto inkrementacja w tabeli, AUTO - auto inkrementacja globalna
     private Long userId;
+    @NotBlank(message = "name is mandatory field")
     private String name;
 //    @Column(name = "last_name")
+    @NotBlank(message = "last name is mandatory field")
     private String lastName;
+    @Email(message = "email is incorrect")
+    @NotBlank(message = "email is mandatory field")
     private String email;
+    @Size(min = 6, message = "password must have at least {min} characters")
+    @NotBlank(message = "password is mandatory field")
     private String password;
     private LocalDateTime registrationDate;
     private Boolean status;
