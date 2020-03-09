@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.tarr1.spring_app.model.Post;
+import pl.tarr1.spring_app.model.User;
 import pl.tarr1.spring_app.model.enums.Category;
 import pl.tarr1.spring_app.service.PostService;
 import pl.tarr1.spring_app.service.UserService;
@@ -59,9 +60,23 @@ public class BlogController {
         return "redirect:/";        // wykonanie żądania get na adres "/"
     }
     @GetMapping("/register")
-    public String register(){
+    public String register(Model model){
+        model.addAttribute("user", new User());
         return "registration";
     }
+    @PostMapping("/register")
+    public String register(@ModelAttribute @Valid User user, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "registration";
+        }
+        userService.registerUser(
+                user.getName(),user.getLastName() ,user.getEmail() ,user.getPassword());
+        return "redirect:/";
+    }
+
+
+
+
     @GetMapping("/login")
     public String login(){
         return "login";
