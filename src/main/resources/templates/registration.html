@@ -24,21 +24,21 @@
           <form th:action="@{/register}" th:method="post" th:object="${user}">
             <div class="form-group">
               <p th:errors="*{name}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
-              <input th:field="*{name}" type="text" placeholder="input your name" class="form-control"></br>        <!-- pole tekstowe jednowierszowe -->
+              <input th:field="*{name}" type="text" placeholder="input your name" class="form-control" required></br>        <!-- pole tekstowe jednowierszowe -->
 
               <p th:errors="*{lastName}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
-              <input th:field="*{lastName}" type="text" placeholder="input your last name" class="form-control"></br>
+              <input th:field="*{lastName}" type="text" placeholder="input your last name" class="form-control" required></br>
 
               <p th:if="${emailExists != null}" th:text="${emailExists}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
               <p th:errors="*{email}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
-              <input th:field="*{email}" type="email" placeholder="input your email" class="form-control"></br>
+              <input th:field="*{email}" type="email" placeholder="input your email" class="form-control" required></br>
 
               <p th:errors="*{password}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
               <p th:if="${differentPassword != null}" th:text="${differentPassword}" style="font-size: 10px" class="alert alert-danger"></p>
-              <input th:field="*{password}" type="password" placeholder="input your password" class="form-control"></br>
+              <input th:field="*{password}" type="password" placeholder="input your password" class="form-control" required></br>
 
               <p th:if="${differentPassword != null}" th:text="${differentPassword}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
-              <input th:field="*{passwordConfirm}" type="password" placeholder="confirm your password" class="form-control"></br>
+              <input th:field="*{passwordConfirm}" type="password" placeholder="confirm your password" class="form-control" required></br>
 
               <input type="submit" value="register" class="btn btn-primary mt-2 float-center">                      <!-- button -->
             </div>
