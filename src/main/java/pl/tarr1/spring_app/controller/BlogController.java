@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.tarr1.spring_app.model.Post;
 import pl.tarr1.spring_app.model.User;
 import pl.tarr1.spring_app.model.enums.Category;
@@ -73,14 +70,12 @@ public class BlogController {
             model.addAttribute("differentPassword", "Registration failed! Passwords were different.");
             return "registration";
         }
-        userService.registerUser(
-                user.getName(),user.getLastName() ,user.getEmail() ,user.getPassword());
+        if(!userService.registerUser(user.getName(),user.getLastName() ,user.getEmail() ,user.getPassword() )){
+            model.addAttribute("emailExists", "E-mail " + user.getEmail()+ " exists in our blog!");
+            return "registration";
+        }
         return "redirect:/";
     }
-
-
-
-
     @GetMapping("/login")
     public String login(){
         return "login";
