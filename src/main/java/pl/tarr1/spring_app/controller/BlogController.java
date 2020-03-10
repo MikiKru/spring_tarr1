@@ -64,6 +64,7 @@ public class BlogController {
     @PostMapping("/register")
     public String register(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(System.out::println);
             return "registration";
         }
         if(!user.getPassword().equals(user.getPasswordConfirm())){

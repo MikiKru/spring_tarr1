@@ -26,7 +26,7 @@ public class User {
 //    @Column(name = "last_name")
     @NotBlank(message = "last name is mandatory field")
     private String lastName;
-    @Email(message = "email is incorrect")
+    @Pattern(regexp = "^[0-9a-z_.-]+@[0-9a-z-.]+[.][a-z]{2,}", message = "email is incorrect")
     @NotBlank(message = "email is mandatory field")
     private String email;
     @Size(min = 6, message = "password must have at least {min} characters")
