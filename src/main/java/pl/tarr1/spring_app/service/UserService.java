@@ -1,6 +1,7 @@
 package pl.tarr1.spring_app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.tarr1.spring_app.model.User;
 import pl.tarr1.spring_app.repository.RoleRepository;
@@ -23,7 +24,8 @@ public class UserService {
     // INSERT INTO user VALUES (?,?,?,?)
     public boolean registerUser(String name, String lastName, String email, String password){
         if(!getUserByEmail(email).isPresent()) {
-            userRepository.save(new User(name, lastName, email, password,
+            // String BCryptPasswordEncoder().encode(String) -> zwraca zaszyfrowane hasło
+            userRepository.save(new User(name, lastName, email, new BCryptPasswordEncoder().encode(password),
                     LocalDateTime.now(), true, roleRepository.getOne(1L)));
             return true;
         }
