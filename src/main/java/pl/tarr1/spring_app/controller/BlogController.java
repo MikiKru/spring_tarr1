@@ -1,6 +1,7 @@
 package pl.tarr1.spring_app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,7 +43,11 @@ public class BlogController {
         return "addPost";
     }
     @PostMapping("/addPost")               // adres na którym odbierane są parametry przekazane żądaniem GET /addPost
-    public String addPost(@ModelAttribute @Valid Post post, BindingResult bindingResult, Model model){
+    public String addPost(
+            @ModelAttribute @Valid Post post,
+            BindingResult bindingResult,
+            Model model,
+            Authentication authentication){
         // @ModelAttribute Typ nazwaObiektu -> pobiera obiekt przekazany określonym żądaniem
         if(bindingResult.hasErrors()){      // obiekt bindingResult przechowuje informacje o błędach
                                             // wynikających z niespełnienia wymagań adnotacji w modelu Post

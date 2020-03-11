@@ -1,6 +1,9 @@
 package pl.tarr1.spring_app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.tarr1.spring_app.model.User;
@@ -67,7 +70,19 @@ public class UserService {
         }
         return false;
     }
-
+    // na bazie danych logowania i obiektu Authantication zwróć obiekt zalogowanego usera
+    public User getUserBasedOnAuthentication(Authentication authentication){
+        if(authentication == null){
+            // gdy nie jesteśmy zalogowani
+            return null;
+        }
+        UserDetails principal = (UserDetails) authentication.getPrincipal();
+        System.out.println(principal.getUsername());
+        System.out.println(principal.getPassword());
+        principal.getAuthorities().stream().forEach(o -> System.out.println(((GrantedAuthority) o).getAuthority()));
+        // obiekt zalogowanego użytkownika
+        return getUserByEmail(principal.getUsername()).get();
+    }
 
 
 
