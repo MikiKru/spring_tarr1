@@ -24,8 +24,8 @@
             <h3 th:text="${'category: ' + post.getCategory().getCategoryName()}" class="post-subtitle"> category </h3>
           </a>
           <p th:text="${'author: ' + post.getUser().getName() + ' ' + post.getUser().getLastName()}"class="post-meta"> author </p>
-          <a class="fa fa-trash" href="@{'/deletePost&' + post.getPostId()}">  </a>
-          <a class="fa fa-trash" style="color: red" href="@{'/deletePost&' + post.getPostId()}">  </a>
+          <a th:if="${isUser && !isAdmin}" class="fa fa-trash" th:href="@{'/deletePost&' + ${post.getPostId()}}">  </a>
+          <a th:if="${isAdmin}" class="fa fa-trash" style="color: red" th:href="@{'/deletePost&' + ${post.getPostId()}}">  </a>
         </div>
         <hr>
         <!-- Pager -->

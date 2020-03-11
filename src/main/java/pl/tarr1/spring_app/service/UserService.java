@@ -83,9 +83,16 @@ public class UserService {
         // obiekt zalogowanego użytkownika
         return getUserByEmail(principal.getUsername()).get();
     }
-
-
-
-
-
+    public boolean isUser(Authentication authentication){
+        UserDetails principal = (UserDetails) authentication.getPrincipal();
+        return principal.getAuthorities()
+                .stream()
+                .anyMatch(o -> ((GrantedAuthority) o).getAuthority().equals("ROLE_USER"));
+    }
+    public boolean isAdmin(Authentication authentication){
+        UserDetails principal = (UserDetails) authentication.getPrincipal();
+        return principal.getAuthorities()
+                .stream()
+                .anyMatch(o -> ((GrantedAuthority) o).getAuthority().equals("ROLE_ADMIN"));
+    }
 }

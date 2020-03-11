@@ -31,6 +31,8 @@ public class BlogController {
         model.addAttribute("posts", postService.getAllPostsOrderBySubmissionDateDesc());
         model.addAttribute("authentication", authentication);
         model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
+        model.addAttribute("isUser", userService.isUser(authentication));
+        model.addAttribute("isAdmin", userService.isAdmin(authentication));
         return "posts";         // nazwa widoku bez .html
     }
     @GetMapping("/posts&{postId}")
