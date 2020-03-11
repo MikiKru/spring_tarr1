@@ -20,6 +20,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/addPost").hasAnyAuthority("ROLE_USER")
                     .antMatchers("/posts&**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
                     .antMatchers("/logout").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                    .antMatchers("/deletePost**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .anyRequest()              // każde żądanie nie wymienione pod autorizeRequests()
                     .permitAll()           // nie wymaga zalogowania
                 .and()
