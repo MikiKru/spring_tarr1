@@ -84,12 +84,18 @@ public class UserService {
         return getUserByEmail(principal.getUsername()).get();
     }
     public boolean isUser(Authentication authentication){
+        if(authentication == null){
+            return false;
+        }
         UserDetails principal = (UserDetails) authentication.getPrincipal();
         return principal.getAuthorities()
                 .stream()
                 .anyMatch(o -> ((GrantedAuthority) o).getAuthority().equals("ROLE_USER"));
     }
     public boolean isAdmin(Authentication authentication){
+        if(authentication == null){
+            return false;
+        }
         UserDetails principal = (UserDetails) authentication.getPrincipal();
         return principal.getAuthorities()
                 .stream()
