@@ -25,21 +25,27 @@ public class BlogController {
     }
 
     @GetMapping("/")
-    public String getPosts(Model model){
+    public String getPosts(Model model, Authentication authentication){
         // Model model - obiekt do komunikacji front-end i back-end
         // model.addAttribute("nazwaObiektuNaFroncie", obiektJava);
         model.addAttribute("posts", postService.getAllPostsOrderBySubmissionDateDesc());
+        model.addAttribute("authentication", authentication);
+        model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "posts";         // nazwa widoku bez .html
     }
     @GetMapping("/posts&{postId}")
-    public String getPostById(@PathVariable("postId") Long postId, Model model){
+    public String getPostById(@PathVariable("postId") Long postId, Model model, Authentication authentication){
         model.addAttribute("post", postService.findPostById(postId));
+        model.addAttribute("authentication", authentication);
+        model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "post";
     }
     @GetMapping("/addPost")                 // wywołanie formularza i przekazanie parametrów POST /addPost
-    public String addPost(Model model){
+    public String addPost(Model model, Authentication authentication){
         model.addAttribute("post", new Post());                 // przekazanie obiektu post do th:object formularza
         model.addAttribute("categories", Category.values());    // przekazanie tablicy kategorii do option formularza
+        model.addAttribute("authentication", authentication);
+        model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "addPost";
     }
     @PostMapping("/addPost")               // adres na którym odbierane są parametry przekazane żądaniem GET /addPost
@@ -64,8 +70,10 @@ public class BlogController {
         return "redirect:/";        // wykonanie żądania get na adres "/"
     }
     @GetMapping("/register")
-    public String register(Model model){
+    public String register(Model model, Authentication authentication){
         model.addAttribute("user", new User());
+        model.addAttribute("authentication", authentication);
+        model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "registration";
     }
     @PostMapping("/register")
@@ -85,11 +93,15 @@ public class BlogController {
         return "redirect:/";
     }
     @GetMapping("/login")
-    public String login(){
+    public String login(Authentication authentication){
+        model.addAttribute("authentication", authentication);
+        model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "login";
     }
     @GetMapping("/contact")
-    public String contact(){
+    public String contact(Authentication authentication){
+        model.addAttribute("authentication", authentication);
+        model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "contact";
     }
 }
