@@ -106,4 +106,9 @@ public class BlogController {
         model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "contact";
     }
+    @RequestMapping(value = "/deletePost&{postId}", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public String deletePost(@PathVariable("postId") Long postId){
+        postService.deletePostById(postId);
+        return "redirect:/";
+    }
 }
