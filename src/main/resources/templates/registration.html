@@ -21,7 +21,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
         <h1>Registration form</h1>
 
-          <form th:action="@{/register}" th:method="post" th:object="${user}">
+          <form th:action="@{/register}" th:method="post" th:object="${registerUser}">
             <div class="form-group">
               <p th:errors="*{name}" style="font-size: 10px" class="alert alert-danger"> error </p>             <!-- wyświetla komunikat błędu dla adnotacji @NotBlank -->
               <input th:field="*{name}" type="text" placeholder="input your name" class="form-control" required></br>        <!-- pole tekstowe jednowierszowe -->

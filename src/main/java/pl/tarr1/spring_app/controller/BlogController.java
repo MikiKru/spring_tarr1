@@ -71,13 +71,13 @@ public class BlogController {
     }
     @GetMapping("/register")
     public String register(Model model, Authentication authentication){
-        model.addAttribute("user", new User());
+        model.addAttribute("registerUser", new User());
         model.addAttribute("authentication", authentication);
         model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "registration";
     }
     @PostMapping("/register")
-    public String register(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model){
+    public String register(@ModelAttribute("registerUser") @Valid User user, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(System.out::println);
             return "registration";
