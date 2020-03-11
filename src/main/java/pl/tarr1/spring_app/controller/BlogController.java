@@ -58,7 +58,9 @@ public class BlogController {
                 post.getTitle(),
                 post.getContent(),
                 post.getCategory(),
-                userService.getUserById(3L).get().getUserId());
+                //userService.getUserById(3L).get().getUserId()
+                userService.getUserBasedOnAuthentication(authentication).getUserId()
+        );
         return "redirect:/";        // wykonanie żądania get na adres "/"
     }
     @GetMapping("/register")
