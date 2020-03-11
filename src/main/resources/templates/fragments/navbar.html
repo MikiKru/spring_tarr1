@@ -20,13 +20,13 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/addPost}">add post</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${authentication == null}">
                     <a class="nav-link" th:href="@{/register}"> registration</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${authentication == null}">
                     <a class="nav-link" th:href="@{/login}"> login </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${authentication != null}">
                     <a class="nav-link" th:href="@{/logout}"> logout </a>
                 </li>
                 <li class="nav-item">
