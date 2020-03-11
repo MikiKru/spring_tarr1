@@ -93,13 +93,13 @@ public class BlogController {
         return "redirect:/";
     }
     @GetMapping("/login")
-    public String login(Authentication authentication){
+    public String login(Authentication authentication, Model model){
         model.addAttribute("authentication", authentication);
         model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "login";
     }
     @GetMapping("/contact")
-    public String contact(Authentication authentication){
+    public String contact(Authentication authentication, Model model){
         model.addAttribute("authentication", authentication);
         model.addAttribute("user", userService.getUserBasedOnAuthentication(authentication));
         return "contact";
